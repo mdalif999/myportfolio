@@ -1,0 +1,72 @@
+{
+  "entities": {
+    "Project": {
+      "title": "Project",
+      "description": "A portfolio project item",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "category": { "type": "string" },
+        "image": { "type": "string" },
+        "description": { "type": "string" },
+        "githubUrl": { "type": "string" },
+        "liveUrl": { "type": "string" },
+        "order": { "type": "number" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "category", "image", "description", "order"]
+    },
+    "Message": {
+      "title": "Message",
+      "description": "A message from a site visitor",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "message": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["message", "createdAt"]
+    },
+    "Settings": {
+      "title": "Settings",
+      "description": "Global site settings",
+      "type": "object",
+      "properties": {
+        "portraitImage": { "type": "string" },
+        "cvUrl": { "type": "string" },
+        "reading": { "type": "string" },
+        "focus": { "type": "string" },
+        "philosophy": { "type": "string" },
+        "heroTitle1": { "type": "string" },
+        "heroTitle2": { "type": "string" },
+        "heroTitle3": { "type": "string" },
+        "heroSubtitle": { "type": "string" },
+        "footerTagline": { "type": "string" },
+        "socials": {
+          "type": "object",
+          "properties": {
+            "github": { "type": "string" },
+            "linkedin": { "type": "string" },
+            "twitter": { "type": "string" },
+            "email": { "type": "string" }
+          }
+        }
+      }
+    }
+  },
+  "firestore": {
+    "projects": {
+      "schema": "Project",
+      "description": "Portfolio projects collection"
+    },
+    "messages": {
+      "schema": "Message",
+      "description": "Visitor messages collection"
+    },
+    "settings": {
+      "schema": "Settings",
+      "description": "Global site settings collection"
+    }
+  }
+}

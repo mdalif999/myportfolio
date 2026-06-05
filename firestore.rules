@@ -1,0 +1,49 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helpers
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && 
+             request.auth.token.email == 'mdalif1046@gmail.com' && 
+             request.auth.token.email_verified == true;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    // Projects Collection
+    match /projects/{projectId} {
+      allow read: if true;
+      allow write: if isAdmin() && isValidId(projectId);
+    }
+
+    // Messages Collection
+    match /messages/{messageId} {
+      allow create: if true; // Open to visitors
+      allow read, delete: if isAdmin();
+      allow update: if false;
+    }
+
+    // Settings Collection
+    match /settings/{settingId} {
+      allow read: if true;
+      allow write: if isAdmin() && isValidId(settingId);
+    }
+    
+    // Connection test document
+    match /test/connection {
+      allow read: if true;
+    }
+  }
+}

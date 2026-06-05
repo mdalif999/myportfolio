@@ -1,0 +1,6 @@
+{
+  "name": "Lumina Creative Portfolio",
+  "description": "A high-end, editorial-style portfolio to showcase creative works and technical expertise.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
